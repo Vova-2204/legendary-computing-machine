@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for x in {1..30}
+for x in {1..120}
 do
   echo "Counting ${x}"
   sleep 1
