@@ -7,14 +7,16 @@ pipeline {
         stage('Run on master') {
           agent { label 'master' }
           steps {
-            sh "sleep 30"
+            sh "chmod +x ./sleep.sh"
+            sh "./sleep.sh"
           }
         }
 
         stage('Run on master-slave') {
           agent { label 'master-slave' }
           steps {
-            sh "sleep 30"
+            sh "chmod +x ./sleep.sh"
+            sh "./sleep.sh"
           }
         }
       }
