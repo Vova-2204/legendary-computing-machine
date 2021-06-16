@@ -2,6 +2,7 @@ pipeline {
   agent none
   environment {
     VARIABLE = 'PATH'
+    VARIABLE2 = 'VAR2'
   }
 
   stages {
@@ -19,7 +20,7 @@ pipeline {
         stage('Run on master-slave') {
           agent { label 'master-slave' }
 	  environment {
-	    VARIABLE = "${VARIABLE}, ololo"
+	    VARIABLE = VARIABLE2
 	  }
           steps {
             sh "chmod +x ./sleep.sh"
