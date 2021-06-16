@@ -1,9 +1,5 @@
 pipeline {
   agent none
-  environment {
-    VARIABLE = 'PATH'
-    VARIABLE2 = 'VAR2'
-  }
 
   stages {
     stage('Run in parallel') {
@@ -13,19 +9,25 @@ pipeline {
           steps {
             sh "chmod +x ./sleep.sh"
             sh "./sleep.sh"
-	    echo "Variable equals: ${VARIABLE}"
           }
         }
 
         stage('Run on master-slave') {
           agent { label 'master-slave' }
-	  environment {
-	    VARIABLE = VARIABLE2
-	  }
-          steps {
-            sh "chmod +x ./sleep.sh"
-            sh "./sleep.sh"
-	    echo "Variable equals: ${VARIABLE}"
+          stages {
+            stage('Run master-slave') {
+              steps {
+                sh "chmod +x ./sleep.sh"
+                sh "./sleep.sh"
+              }
+            }
+
+            stage('Run master-slave2') {
+              steps {
+                sh "chmod +x ./sleep.sh"
+                sh "./sleep.sh"
+              }
+            }
           }
         }
       }
