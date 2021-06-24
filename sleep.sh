@@ -1,5 +1,5 @@
 #!/bin/bash
-SECONDS=$1
+SECONDS=$(expr $1)
 
 for x in {1..$SECONDS}
 do
