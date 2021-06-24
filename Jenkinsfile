@@ -2,7 +2,7 @@ pipeline {
   agent none
 
   stages {
-    stage('Run in parallel') {
+    stage('FIRST STAGE') {
       parallel {
         stage('Run on master') {
           agent { label 'master' }
@@ -12,7 +12,7 @@ pipeline {
           }
         }
 
-        stage('Run on master-slave') {
+        stage('SECOND STAGE FOR 60') {
           agent { label 'master-slave' }
           stages {
             stage('Run master-slave') {
@@ -22,7 +22,7 @@ pipeline {
               }
             }
 
-            stage('Run master-slave2') {
+            stage('THIRD STAGE FOR 60') {
               steps {
                 sh "chmod +x ./sleep.sh"
                 sh "./sleep.sh 60"
