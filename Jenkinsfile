@@ -8,28 +8,24 @@ pipeline {
           agent { label 'master' }
           steps {
             sh "chmod +x ./sleep.sh"
-            sh "./sleep.sh"
+            sh "./sleep.sh 120"
           }
         }
 
         stage('Run on master-slave') {
           agent { label 'master-slave' }
           stages {
-            stage('Run parallel two stages at end') {
-              parallel {
-                stage('Run master-slave') {
-                  steps {
-                    sh "chmod +x ./sleep.sh"
-                    sh "./sleep.sh"
-                  }
-                }
+            stage('Run master-slave') {
+              steps {
+                sh "chmod +x ./sleep.sh"
+                sh "./sleep.sh 60"
+              }
+            }
 
-                stage('Run master-slave2') {
-                  steps {
-                    sh "chmod +x ./sleep.sh"
-                    sh "./sleep.sh"
-                  }
-                }
+            stage('Run master-slave2') {
+              steps {
+                sh "chmod +x ./sleep.sh"
+                sh "./sleep.sh 60"
               }
             }
           }
