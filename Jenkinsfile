@@ -15,17 +15,19 @@ pipeline {
         stage('Run on master-slave') {
           agent { label 'master-slave' }
           stages {
-            stage('Run master-slave') {
-              steps {
-                sh "chmod +x ./sleep.sh"
-                sh "./sleep.sh"
+            parallel {
+              stage('Run master-slave') {
+                steps {
+                  sh "chmod +x ./sleep.sh"
+                  sh "./sleep.sh"
+                }
               }
-            }
 
-            stage('Run master-slave2') {
-              steps {
-                sh "chmod +x ./sleep.sh"
-                sh "./sleep.sh"
+              stage('Run master-slave2') {
+                steps {
+                  sh "chmod +x ./sleep.sh"
+                  sh "./sleep.sh"
+                }
               }
             }
           }
