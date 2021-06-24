@@ -2,9 +2,9 @@ pipeline {
   agent none
 
   stages {
-    stage('FIRST STAGE') {
+    stage('Parallel stage') {
       parallel {
-        stage('Run on master') {
+        stage('FIRST STAGE FOR 120') {
           agent { label 'master' }
           steps {
             sh "chmod +x ./sleep.sh"
