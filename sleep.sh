@@ -1,7 +1,7 @@
 #!/bin/bash
-SECONDS=$(expr $1)
+SECONDS=$1
 
-for x in {1..$SECONDS}
+for (( x = 0 ; x <= $SECONDS ; x++ ))
 do
   echo "Counting ${x}"
   sleep 1
