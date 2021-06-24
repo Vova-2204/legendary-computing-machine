@@ -1,21 +1,21 @@
 pipeline {
-  agent none
+  agent { label 'master-slave' }
 
   stages {
     stage('Parallel stage') {
       parallel {
         stage('FIRST STAGE FOR 120') {
-          agent { label 'master' }
+          // agent { label 'master' }
           steps {
             sh "chmod +x ./sleep.sh"
             sh "./sleep.sh 120"
           }
         }
 
-        stage('SECOND STAGE FOR 60') {
-          agent { label 'master-slave' }
+        stage('Grouped stages') {
+          // agent { label 'master-slave' }
           stages {
-            stage('Run master-slave') {
+            stage('SECOND STAGE FOR 60') {
               steps {
                 sh "chmod +x ./sleep.sh"
                 sh "./sleep.sh 60"
