@@ -15,17 +15,21 @@ pipeline {
       stages {
         stage('Parallel exec') {
           parallel {
-            stage('021-TestSTAGE') {
-              // agent { label 'master' }
-              steps {
-                sh "chmod +x ./sleep.sh"
-                sh "./sleep.sh 60"
-              }
-            }
-            stage('022-Quality') {
-              steps {
-                sh "chmod +x ./sleep.sh"
-                sh "./sleep.sh 60"
+            stage('2Conseq'){
+              stages {
+                stage('021-TestSTAGE') {
+                  // agent { label 'master' }
+                  steps {
+                    sh "chmod +x ./sleep.sh"
+                    sh "./sleep.sh 60"
+                  }
+                }
+                stage('022-Quality') {
+                  steps {
+                    sh "chmod +x ./sleep.sh"
+                    sh "./sleep.sh 60"
+                  }
+                }
               }
             }
             stage('023-Build') {
