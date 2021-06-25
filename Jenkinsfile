@@ -13,26 +13,28 @@ pipeline {
     stage('02-Second') {
       agent { label 'master-slave' }
       stages {
-        parallel {
-          stages {
-            stage('021-TestSTAGE') {
-              // agent { label 'master' }
-              steps {
-                sh "chmod +x ./sleep.sh"
-                sh "./sleep.sh 60"
+        stage('Parallel exec') {
+          parallel {
+            stages {
+              stage('021-TestSTAGE') {
+                // agent { label 'master' }
+                steps {
+                  sh "chmod +x ./sleep.sh"
+                  sh "./sleep.sh 60"
+                }
+              }
+              stage('022-Quality') {
+                steps {
+                  sh "chmod +x ./sleep.sh"
+                  sh "./sleep.sh 60"
+                }
               }
             }
-            stage('022-Quality') {
+            stage('023-Build') {
               steps {
                 sh "chmod +x ./sleep.sh"
-                sh "./sleep.sh 60"
+                sh "./sleep.sh 120"
               }
-            }
-          }
-          stage('023-Build') {
-            steps {
-              sh "chmod +x ./sleep.sh"
-              sh "./sleep.sh 120"
             }
           }
         }
