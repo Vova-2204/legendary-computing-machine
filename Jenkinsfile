@@ -6,7 +6,7 @@ pipeline {
       agent { label 'master' }
       steps {
         echo "Running 01-First stage"
-        sh "chmod +x ./sleep && ./sleep.sh 20"
+        sh "chmod +x ./sleep.sh && ./sleep.sh 20"
       }
     }
     
